@@ -1,0 +1,5 @@
+# Makefile - builds the deeplearning_1.0.sif container.
+
+deeplearning_1.0.sif: Singularity.deeplearning
+	rm -f $@
+	sudo `which singularity` build --disable-cache $@ $<
