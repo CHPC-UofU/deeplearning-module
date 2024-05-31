@@ -1,21 +1,26 @@
-# Singularity.ml - singularity recipe for constructing workflow container. 
-# This workflow uses SLURM to run jobs in parallel.
-# This is hh
-# Originally From:tensorflow/tensorflow.
-# Trying the jupter/tensorflow-notebook base container.
+# Singularity.deeplearning - singularity recipe for constructing 
+# deeplearning module container. 
 Bootstrap:docker
-From: jupyter/tensorflow-notebook
-# From: nvidia/cuda:11.4.2-devel-ubuntu20.04
+From: tensorflow/tensorflow:latest-gpu-jupyter
 
 %labels
 Maintainer brett.milash@utah.edu
-Version 1.0.0
+Version 2024.2.0
 
 %files
 
 %post
 
-pip3 install torch torchvision torchaudio
-#conda install -c anaconda cudatoolkit -y
+pip3 install torch torchvision torchaudio keras-tuner
+pip3 install seaborn
+pip3 install pandas
+pip3 install polars
+pip3 install scikit-learn
+python -m pip install -U scikit-image
+python3 -m pip install --upgrade Pillow
+pip3 install --upgrade "jax[cpu]"
+pip3 install --upgrade "jax[cuda12]"
+pip3 install flax
+pip3 install statsmodels
 
 %runscript
